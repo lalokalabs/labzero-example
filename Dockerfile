@@ -6,13 +6,11 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         vim bash-completion yamllint postgresql-client python3-dev \
         libpq-dev
 
-RUN curl -sSL https://install.python-poetry.org | POETRY_HOME=/opt/poetry python3 -
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 COPY . /app
 WORKDIR /app
-ENV PATH=/opt/poetry/bin:$PATH
-RUN ls /opt/poetry
-RUN poetry config virtualenvs.in-project true && poetry install
+RUN uv sync
 
 FROM node:14.20.0 as js-build
 
