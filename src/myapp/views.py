@@ -7,3 +7,5 @@ def index(request):
         "intro": "Hello world"
     }
     return render(request, "index.html", context)
+
+def tmp_views(request): pass
