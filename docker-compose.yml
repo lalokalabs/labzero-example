@@ -47,3 +47,16 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  app:
+    build: .
+    container_name: myapp_app
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: "postgres://myapp_dev:secret@db:5432/myapp_dev?sslmode=disable"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started # Or service_healthy if redis has a healthcheck
