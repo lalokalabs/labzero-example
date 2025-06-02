@@ -3,7 +3,6 @@ version: '3.7'
 services:
   db:
     image: postgres:15-alpine
-    container_name: myapp_db
     command: >
       postgres
       -c log_statement=all
@@ -27,36 +26,47 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - dokploy-network
 
   redis:
     image: redis:5.0.5
-    container_name: myapp_redis
-    ports:
-      - "6379:6379"
+    networks:
+      - dokploy-network
 
   adminer:
     image: adminer
-    container_name: myapp_adminer
     command: ["php", "-S", "0.0.0.0:8081", "-t", "/var/www/html"]
-    links:
-      - "db:db"
     ports:
-      - "8081:8081"
+      - "127.0.0.1:8081:8081"
     environment:
-      DATABASE_URL: "postgres://myapp_dev:pgsql@db:5432/myapp_dev?sslmode=disable"
+      DATABASE_URL: "postgres://myapp_dev:secret@db:5432/myapp_dev?sslmode=disable"
     depends_on:
       db:
         condition: service_healthy
+    networks:
+      - dokploy-network
 
   app:
     build: .
-    container_name: myapp_app
     ports:
-      - "8000:8000"
+      - "8000"
     environment:
       DATABASE_URL: "postgres://myapp_dev:secret@db:5432/myapp_dev?sslmode=disable"
     depends_on:
       db:
         condition: service_healthy
       redis:
-        condition: service_started # Or service_healthy if redis has a healthcheck
+        condition: service_started
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`dokploy-demo.kafkai.io`)"
+      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.tls.certResolver=letsencrypt"
+      - "traefik.http.services.app.loadbalancer.server.port=8000"
+
+networks:
+  dokploy-network:
+    external: true
