@@ -13,7 +13,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: secret
+      POSTGRES_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
     volumes:
       - ./.docker:/docker-entrypoint-initdb.d
 
@@ -40,7 +40,7 @@ services:
     ports:
       - "127.0.0.1:8081:8081"
     environment:
-      DATABASE_URL: "postgres://myapp_dev:secret@db:5432/myapp_dev?sslmode=disable"
+      DATABASE_URL: "${DATABASE_URL}"
     depends_on:
       db:
         condition: service_healthy
@@ -52,7 +52,7 @@ services:
     ports:
       - "8000"
     environment:
-      DATABASE_URL: "postgres://myapp_dev:secret@db:5432/myapp_dev?sslmode=disable"
+      DATABASE_URL: "${DATABASE_URL}"
     depends_on:
       db:
         condition: service_healthy
