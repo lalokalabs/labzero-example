@@ -62,10 +62,23 @@ services:
       - dokploy-network
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.app.rule=Host(`dokploy-demo.kafkai.io`)"
-      - "traefik.http.routers.app.entrypoints=websecure"
-      - "traefik.http.routers.app.tls.certResolver=letsencrypt"
-      - "traefik.http.services.app.loadbalancer.server.port=8000"
+      # --- Tell Traefik this service is on the dokploy-network if not default ---
+      - "traefik.docker.network=dokploy-network"
+      # --- HTTP Router (for dokploy-demo.kafkai.io) ---
+      - "traefik.http.routers.app-http.rule=Host(`dokploy-demo.kafkai.io`)"
+      - "traefik.http.routers.app-http.entrypoints=web" # Listen on HTTP
+      # --- Middleware to redirect HTTP to HTTPS ---
+      - "traefik.http.routers.app-http.middlewares=redirect-to-https@docker" # Or use a pre-defined one by Dokploy like redirect-to-https@file
+      # --- HTTPS Router (for dokploy-demo.kafkai.io) ---
+      - "traefik.http.routers.app-secure.rule=Host(`dokploy-demo.kafkai.io`)"
+      - "traefik.http.routers.app-secure.entrypoints=websecure" # Listen on HTTPS
+      - "traefik.http.routers.app-secure.tls=true" # Enable TLS
+      # --- Use the default cert resolver defined on the websecure entrypoint (which is 'letsencrypt') ---
+      # No explicit "traefik.http.routers.app-secure.tls.certResolver=letsencrypt" needed if 'letsencrypt' is the entrypoint default
+      # --- Define the service Traefik should route to ---
+      - "traefik.http.services.app-service.loadbalancer.server.port=8000" # Your app's internal port
+      - "traefik.http.routers.app-secure.service=app-service" # Link HTTPS router to this service
+      - "traefik.http.routers.app-http.service=app-service" # Link HTTP router to this service (it just redirects)
 
 networks:
   dokploy-network:
