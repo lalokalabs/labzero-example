@@ -76,9 +76,9 @@ services:
       # --- Use the default cert resolver defined on the websecure entrypoint (which is 'letsencrypt') ---
       # No explicit "traefik.http.routers.app-secure.tls.certResolver=letsencrypt" needed if 'letsencrypt' is the entrypoint default
       # --- Define the service Traefik should route to ---
-      - "traefik.http.services.app-service.loadbalancer.server.port=8000" # Your app's internal port
-      - "traefik.http.routers.app-secure.service=app-service" # Link HTTPS router to this service
-      - "traefik.http.routers.app-http.service=app-service" # Link HTTP router to this service (it just redirects)
+      - "traefik.http.services.tulip-django-lkuhtn.loadbalancer.server.port=8000"
+      - "traefik.http.routers.app-secure.service=tulip-django-lkuhtn"
+      - "traefik.http.routers.app-http.service=tulip-django-lkuhtn"
 
 networks:
   dokploy-network:
