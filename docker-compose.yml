@@ -79,6 +79,7 @@ services:
       - "traefik.http.services.tulip-django-lkuhtn.loadbalancer.server.port=8000"
       - "traefik.http.routers.app-secure.service=tulip-django-lkuhtn"
       - "traefik.http.routers.app-http.service=tulip-django-lkuhtn"
+      - "traefik.http.services.tulip-django-lkuhtn.loadbalancer.server.scheme=http"
 
 networks:
   dokploy-network:
