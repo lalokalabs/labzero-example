@@ -68,7 +68,7 @@ services:
       - "traefik.http.routers.app-http.rule=Host(`dokploy-demo.kafkai.io`)"
       - "traefik.http.routers.app-http.entrypoints=web" # Listen on HTTP
       # --- Middleware to redirect HTTP to HTTPS ---
-      - "traefik.http.routers.app-http.middlewares=redirect-to-https@docker" # Or use a pre-defined one by Dokploy like redirect-to-https@file
+      #- "traefik.http.routers.app-http.middlewares=redirect-to-https@docker" # Or use a pre-defined one by Dokploy like redirect-to-https@file
       # --- HTTPS Router (for dokploy-demo.kafkai.io) ---
       - "traefik.http.routers.app-secure.rule=Host(`dokploy-demo.kafkai.io`)"
       - "traefik.http.routers.app-secure.entrypoints=websecure" # Listen on HTTPS
