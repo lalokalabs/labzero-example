@@ -175,9 +175,6 @@ LOGIN_URL = "/login/start/"
 LOGIN_REDIRECT_URL = "/user/"
 LOGOUT_REDIRECT_URL = "/"
 
-if DEBUG:
-    CSRF_TRUSTED_ORIGINS = [
-        f'https://*.{os.environ["GITPOD_WORKSPACE_CLUSTER_HOST"]}',
-    ]
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 
 WAGTAIL_SITE_NAME = "My App"
