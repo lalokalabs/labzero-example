@@ -5,7 +5,7 @@ authors = [
 license = {text = "MIT"}
 requires-python = "<4.0,>=3.8"
 dependencies = [
-    "Django<5.0.0,>=4.0.3",
+    "Django<6.0.0,>=4.0.3",
     "myapp-cli",
     "click<9.0.0,>=8.1.0",
     "django-environ<1.0.0,>=0.8.1",
@@ -13,8 +13,8 @@ dependencies = [
     "sentry-sdk[django]<2.0.0,>=1.29.2",
     "whitenoise<7.0.0,>=6.5.0",
     "gunicorn<22.0.0,>=21.2.0",
-    "wagtail<6.0.0,>=5.1.1",
-    "django-extensions<4.0.0,>=3.2.3",
+    "wagtail<8.0.0,>=5.1.1",
+    "django-extensions<5.0.0,>=3.2.3",
     "werkzeug<3.0.0,>=2.3.7",
     "psycopg2>=2.9.10",
 ]
@@ -25,8 +25,8 @@ description = "Some description"
 [dependency-groups]
 dev = [
     "pytest<8.0.0,>=7.1.1",
-    "django-extensions<4.0.0,>=3.1.5",
-    "django-debug-toolbar<4.0.0,>=3.2.4",
+    "django-extensions<5.0.0,>=3.1.5",
+    "django-debug-toolbar<5.0.0,>=3.2.4",
     "pytest-djangoapp<1.0.0,>=0.15.1",
 ]
 
