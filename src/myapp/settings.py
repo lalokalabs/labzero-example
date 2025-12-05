@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "djangomix",
+    "myapp_user",
     "myapp",
 
     'wagtail.contrib.forms',
@@ -132,9 +133,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Uncomment to use custom user model
-# AUTH_USER_MODEL = "myapp_user.User"
-# AUTHENTICATION_BACKENDS = ["myapp.auth.AuthBackend"]
+AUTH_USER_MODEL = "myapp_user.User"
+#AUTHENTICATION_BACKENDS = ["myapp.auth.AuthBackend"]
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
