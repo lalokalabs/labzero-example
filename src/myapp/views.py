@@ -7,3 +7,6 @@ def index(request):
         "intro": "Hello world"
     }
     return render(request, "index.html", context)
+
+def dashboard(request):
+    return render(request, "dashboard.html")

@@ -10,6 +10,7 @@ from myapp import views
 
 urlpatterns = [
     path("", views.index),
+    path("dashboard/", views.dashboard, name="dashboard"),
     path('admin/', admin.site.urls),
 
     path('cms/', include(wagtailadmin_urls)),
