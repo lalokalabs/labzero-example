@@ -8,7 +8,7 @@ migrate:
 
 .PHONY: dev
 dev: migrate
-	uv run python scripts/devdb.py
+	uv run python scripts/setup_dev.py
 
 .PHONY: run
 run:
