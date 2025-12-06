@@ -1,17 +1,34 @@
 import Swal from 'sweetalert2';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const button = document.createElement('button');
-  button.innerText = 'Show SweetAlert';
-  button.className = 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600';
-  document.body.appendChild(button);
+  const showSweetAlertButton = document.getElementById('showSweetAlertButton');
 
-  button.addEventListener('click', () => {
-    Swal.fire({
-      title: 'Hello!',
-      text: 'This is a SweetAlert2 example.',
-      icon: 'success',
-      confirmButtonText: 'Cool'
+  if (showSweetAlertButton) {
+    showSweetAlertButton.addEventListener('click', () => {
+      Swal.fire({
+        title: 'Confirm Action',
+        text: 'Do you want to proceed with this action?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Confirmed!',
+            'Your action has been confirmed.',
+            'success'
+          );
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            'Cancelled',
+            'Your action has been cancelled.',
+            'error'
+          );
+        }
+      });
     });
-  });
+  }
 });
