@@ -1,8 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './src/kai_site/**/*.html',
-    './src/kai-site/fe/**/*.js',
+    './templates/**/*.html',
+    './src/myapp/**/*.html',
+    './src/myapp/fe/**/*.js',
   ],
   theme: {
     extend: {
