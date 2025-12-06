@@ -4,12 +4,12 @@ up:
 
 .PHONY: migrate
 migrate:
-	poetry run myapp manage migrate
+	uv run myapp manage migrate
 
-.PHONY: devdb
-devdb: migrate
-	poetry run python scripts/devdb.py
+.PHONY: dev
+dev: migrate
+	uv run python scripts/devdb.py
 
 .PHONY: run
 run:
-	poetry run myapp manage runserver_plus
+	uv run myapp manage runserver_plus
