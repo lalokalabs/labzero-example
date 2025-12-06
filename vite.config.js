@@ -8,7 +8,7 @@ export default defineConfig({
     outDir: resolve("./static"),
     rollupOptions: {
       input: {
-        'app-css': 'src/myapp/fe/sass/app.css',
+        'app-css': 'src/myapp/fe/css/app.css',
         'main-js': 'src/myapp/fe/js/main.js'
       }
     }
