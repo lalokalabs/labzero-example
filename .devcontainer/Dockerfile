@@ -36,3 +36,5 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Ensure ~/.cargo/bin is in PATH
 ENV PATH="/home/vscode/.cargo/bin:$PATH"
+
+RUN curl -L https://github.com/axllent/mailpit/releases/download/v1.20.5/mailpit-linux-amd64.tar.gz | sudo tar -xz -C /usr/local/bin mailpit

@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run development",
-    "development": "mix",
-    "watch": "mix watch",
+    "development": "vite build",
+    "watch": "vite build --watch",
     "hot": "mix watch --hot",
     "prod": "npm run production",
-    "production": "mix --production",
-    "vitbuild": "vite build"
+    "production": "vite build"
   },
   "keywords": [],
   "author": "",

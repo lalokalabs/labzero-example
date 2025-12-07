@@ -12,4 +12,4 @@ dev: migrate
 
 .PHONY: run
 run:
-	uv run myapp manage runserver_plus
+	overmind start -l web,vit,mail
