@@ -1,15 +1,38 @@
-FROM mcr.microsoft.com/devcontainers/python:1-3.11-bullseye
+FROM mcr.microsoft.com/devcontainers/python:3.12-bullseye
 
-ENV PYTHONUNBUFFERED 1
+# Update and install required packages as root
+RUN apt-get update && \
+    apt-get install -y \
+    sudo \
+    curl \
+    gzip \
+    postgresql-client \
+    golang-go \
+    gettext \
+    python3-dev \
+    netcat-openbsd \
+    util-linux \
+    vim \
+    bash-completion \
+    yamllint \
+    tmux \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# [Optional] If your requirements rarely change, uncomment this section to add them to the image.
-# COPY requirements.txt /tmp/pip-tmp/
-# RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
-#    && rm -rf /tmp/pip-tmp
+# Install Overmind as root
+RUN OVERMIND_VERSION="v2.5.1" && \
+    OVERMIND_URL="https://github.com/DarthSim/overmind/releases/download/${OVERMIND_VERSION}/overmind-${OVERMIND_VERSION}-linux-amd64.gz" && \
+    curl -L ${OVERMIND_URL} -o /tmp/overmind.gz && \
+    gunzip /tmp/overmind.gz && \
+    mv /tmp/overmind /usr/local/bin/overmind && \
+    chmod +x /usr/local/bin/overmind
 
-# [Optional] Uncomment this section to install additional OS packages.
-# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
-#     && apt-get -y install --no-install-recommends <your-package-list-here>
+# Switch to vscode user for installing uv
+USER vscode
+WORKDIR /home/vscode
 
+# Install uv as vscode user
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
-
+# Ensure ~/.cargo/bin is in PATH
+ENV PATH="/home/vscode/.cargo/bin:$PATH"
