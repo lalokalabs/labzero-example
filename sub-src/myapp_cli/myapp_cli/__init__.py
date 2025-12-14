@@ -3,12 +3,15 @@
 import os
 import click
 
-@click.group()
-def cli():
+def init():
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myapp.settings")
     import django
 
     django.setup()
+
+@click.group()
+def cli():
+    init()
 
 @click.command(
     context_settings=dict(
