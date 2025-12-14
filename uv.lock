@@ -983,7 +983,7 @@ requires-dist = [
     { name = "django-extensions", specifier = ">=3.2.3,<5.0.0" },
     { name = "djangomix", specifier = ">=1.1.3,<2.0.0" },
     { name = "gunicorn", specifier = ">=21.2.0,<22.0.0" },
-    { name = "myapp-cli", directory = "sub-src/myapp_cli" },
+    { name = "myapp-cli", editable = "sub-src/myapp_cli" },
     { name = "psycopg2", specifier = ">=2.9.10" },
     { name = "sentry-sdk", extras = ["django"], specifier = ">=1.29.2,<2.0.0" },
     { name = "wagtail", specifier = ">=5.1.1,<8.0.0" },
@@ -1002,7 +1002,7 @@ dev = [
 [[package]]
 name = "myapp-cli"
 version = "0.0.0"
-source = { directory = "sub-src/myapp_cli" }
+source = { editable = "sub-src/myapp_cli" }
 dependencies = [
     { name = "click", version = "8.1.8", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "click", version = "8.3.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },

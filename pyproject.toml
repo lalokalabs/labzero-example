@@ -35,4 +35,4 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.uv.sources]
-myapp-cli = { path = "sub-src/myapp_cli" }
+myapp-cli = { path = "sub-src/myapp_cli", editable = true }
