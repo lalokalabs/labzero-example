@@ -21,3 +21,6 @@ Login to the dashboard at `/dashboard/` and using email `admin@myapp.co` and pas
 
 ### Login
 <img width="2463" height="1512" alt="Screenshot from 2025-12-06 11-16-59" src="https://github.com/user-attachments/assets/2110614c-0064-4d7e-81e7-669e7fb72edd" />
+
+## Customize
+The default project name is `myapp` and is used throughout the codebase for db name, settings and file/directory name. Run the script `rename.sh` to change this to your preferred project name.
