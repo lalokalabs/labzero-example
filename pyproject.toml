@@ -18,6 +18,7 @@ dependencies = [
     "werkzeug<3.0.0,>=2.3.7",
     "psycopg2>=2.9.10",
     "labzero",
+    "django-umin",
 ]
 name = "myapp"
 version = "0.0.0"
@@ -38,3 +39,9 @@ build-backend = "hatchling.build"
 [tool.uv.sources]
 myapp-cli = { path = "sub-src/myapp_cli", editable = true }
 labzero = { path = "../labzero", editable = true }
+django-umin = { workspace = true, editable = true }
+
+[tool.uv.workspace]
+members = [
+    "ext-src/django-umin",
+]
