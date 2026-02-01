@@ -8,13 +8,22 @@ if [ "$#" -ne 1 ]; then
 fi
 
 NEW_NAME="$1"
-OLD_NAME="myapp"
+OLD_NAME="basel"
 
 echo "Renaming project from '$OLD_NAME' to '$NEW_NAME'..."
 
+# Define excluded file patterns
+EXCLUDE_FILES="*.{pyc,png,jpg,jpeg,gif,lock,ico}"
+
 # 1. Rename files and directories
 # Use find with -depth to work from the inside out. This avoids renaming a parent directory before its contents.
-find . -depth -name "*${OLD_NAME}*" -not -path "./.git/*" -not -path "./.venv/*" -print0 | while IFS= read -r -d $'\0' path; do
+# Convert EXCLUDE_FILES pattern to find command format
+EXCLUDE_PATTERNS=""
+for pattern in pyc png jpg jpeg gif lock ico; do
+    EXCLUDE_PATTERNS="${EXCLUDE_PATTERNS} -not -name '*.${pattern}'"
+done
+
+find . -depth -name "*${OLD_NAME}*" -not -path "./.git/*" -not -path "./.venv/*" -not -path "./ext-src/*" ${EXCLUDE_PATTERNS} -print0 | while IFS= read -r -d $'\0' path; do
     dir=$(dirname "${path}")
     base=$(basename "${path}")
     new_base=$(echo "${base}" | sed -e "s/${OLD_NAME}/${NEW_NAME}/g")
@@ -33,7 +42,7 @@ done
 # 2. Replace content within all text-based files
 # Exclude binary files and directories that often cause issues.
 echo "Updating file contents..."
-grep -rl "${OLD_NAME}" . --exclude-dir={.git,.venv,node_modules,build,dist} --exclude=\*.{pyc,png,jpg,jpeg,gif,lock,ico} | while read -r file; do
+grep -rl "${OLD_NAME}" . --exclude-dir={.git,.venv,node_modules,build,dist,ext-src} --exclude=${EXCLUDE_FILES} | while read -r file; do
     # Check if file exists, it might have been renamed
     if [ -f "${file}" ]; then
         # Use sed to replace all occurrences of the old name with the new name.
