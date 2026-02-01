@@ -3,7 +3,7 @@ authors = [
     {name = "My Name", email = "myname@myapp.co"},
 ]
 license = {text = "MIT"}
-requires-python = "<4.0,>=3.8"
+requires-python = ">=3.12,<4.0"
 dependencies = [
     "Django<6.0.0,>=4.0.3",
     "myapp-cli",
@@ -17,6 +17,7 @@ dependencies = [
     "django-extensions<5.0.0,>=3.2.3",
     "werkzeug<3.0.0,>=2.3.7",
     "psycopg2>=2.9.10",
+    "labzero",
 ]
 name = "myapp"
 version = "0.0.0"
@@ -36,3 +37,4 @@ build-backend = "hatchling.build"
 
 [tool.uv.sources]
 myapp-cli = { path = "sub-src/myapp_cli", editable = true }
+labzero = { path = "../labzero", editable = true }
