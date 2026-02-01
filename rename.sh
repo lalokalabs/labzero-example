@@ -8,7 +8,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 NEW_NAME="$1"
-OLD_NAME="basel"
+OLD_NAME="myapp"
 
 echo "Renaming project from '$OLD_NAME' to '$NEW_NAME'..."
 
