@@ -2,13 +2,13 @@
 
 set -e # Exit immediately if a command exits with a non-zero status.
 
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <new_project_name>"
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <old_project_name> <new_project_name>"
     exit 1
 fi
 
-NEW_NAME="$1"
-OLD_NAME="myapp"
+NEW_NAME="$2"
+OLD_NAME="$1"
 
 echo "Renaming project from '$OLD_NAME' to '$NEW_NAME'..."
 
