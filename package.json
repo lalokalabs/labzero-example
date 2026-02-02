@@ -4,12 +4,6 @@
   "description": "Some description",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run development",
-    "development": "vite build",
-    "watch": "vite build --watch",
-    "hot": "mix watch --hot",
-    "prod": "npm run production",
-    "production": "vite build"
   },
   "keywords": [],
   "author": "",
@@ -25,5 +19,8 @@
   },
   "engines": {
     "node": "22"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.1.18"
   }
 }
