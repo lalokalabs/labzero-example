@@ -6,7 +6,6 @@ license = {text = "MIT"}
 requires-python = ">=3.12,<4.0"
 dependencies = [
     "Django<6.0.0,>=4.0.3",
-    "myapp-cli",
     "click<9.0.0,>=8.1.0",
     "django-environ<1.0.0,>=0.8.1",
     "djangomix<2.0.0,>=1.1.3",
@@ -37,7 +36,6 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.uv.sources]
-myapp-cli = { path = "sub-src/myapp_cli", editable = true }
 django-umin = { workspace = true, editable = true }
 labzero = { workspace = true, editable = true }
 
