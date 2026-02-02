@@ -4,7 +4,7 @@ up:
 
 .PHONY: migrate
 migrate:
-	uv run myapp manage migrate
+	uv run manage.py migrate
 
 .PHONY: dev
 dev: migrate
@@ -12,4 +12,4 @@ dev: migrate
 
 .PHONY: run
 run:
-	overmind start -l web,vit,mail
+	overmind start -l web,vite,mail
