@@ -15,6 +15,9 @@ make run
 
 Login to the dashboard at `/dashboard/` and using email `admin@myapp.co` and password `picard data`.
 
+## Notes on Github Codespaces
+Vite dev server run on different port than the django dev server and unless you set it to public, it need to be authenticated first. You will need to open the css or js file directly first so that github will authenticate it. After that it should work as expected.
+
 ## Screenshots
 
 ### Dashboard
