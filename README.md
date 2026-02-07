@@ -6,6 +6,14 @@ cp .env.example .env
 make up
 ```
 
+Add to `.env` to automatically start vite dev server:-
+
+```
+DJANGO_UMIN_VITE_DEV_MODE=True
+DJANGO_UMIN_VITE_HMR_PORT=5173
+```
+Or run `uv run manage.py vite_build` to build it manually, such as for production deploy.
+
 In separate terminal, run:-
 
 ```
