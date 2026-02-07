@@ -1,6 +1,7 @@
 ## Quickstart
 
 ```
+git submodule update --init --recursive
 cp .env.example .env
 make up
 ```
