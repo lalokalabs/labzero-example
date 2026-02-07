@@ -49,10 +49,5 @@ LOGIN_TEMPLATE = "labzero/login.html"
 # Use namespaced URLs for login/logout (since they're in labzero namespace)
 LOGIN_URL = "/app/login/"
 
-# Add labzero templates directory to TEMPLATES DIRS to ensure they're found
-import labzero
-labzero_templates_dir = os.path.join(os.path.dirname(labzero.__file__), 'templates')
-TEMPLATES[0]['DIRS'].insert(0, labzero_templates_dir)
-
 # Add myapp_user and myapp to INSTALLED_APPS (keep labzero for core functionality)
-INSTALLED_APPS = INSTALLED_APPS + ["myapp_user", "myapp"]
+INSTALLED_APPS = ["myapp_user", "myapp"] + INSTALLED_APPS
