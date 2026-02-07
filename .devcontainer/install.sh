@@ -12,6 +12,8 @@ curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | \
 echo "deb [signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian stable main" | \
     tee /etc/apt/sources.list.d/yarn.list
 
+apt update && apt install -y tmux
+
 # Install uv using the UV_INSTALL_DIR environment variable for system-wide installation
 echo "Installing uv..."
 # Set the UV_INSTALL_DIR environment variable to /usr/local/bin 
