@@ -56,3 +56,15 @@ The solution draws inspiration from how [Drupal](https://www.drupal.org/) was us
 - Continuous updates: user projects can stay in sync with the upstream template for the lifetime of the project.
 - Clear separation between framework code (`src/labzero/`) and application code (`src/myapp/`).
 - The full project structure — Docker Compose, Procfile, deployment configs, CI configuration — can also evolve upstream and be merged into user projects.
+
+## Known Issue: Docker Container Name Collisions
+
+Because multiple projects can be based on the same `labzero-project` template on the same developer machine, they would all share the same Docker container names if those names were hard-coded (e.g. `container_name: myapp_db`). Docker containers with the same name are reused, meaning data from different projects would end up in the same database container.
+
+**Resolution:**
+
+- All explicit `container_name:` directives have been removed from `docker-compose.yml`.
+- The Docker Compose project name is now set via `name: ${COMPOSE_PROJECT_NAME:-myapp}` in `docker-compose.yml`, falling back to `myapp` if the variable is not set.
+- `COMPOSE_PROJECT_NAME=myapp` is added to `.env.example`. Docker Compose reads this variable automatically from `.env`. When a user runs `rename.sh myapp <newname>`, this value is updated in `.env` along with everything else, giving each project a unique container namespace (e.g., `shopify-db-1`, `shopify-redis-1`).
+
+This ensures that each project on the same machine gets its own isolated set of Docker containers and data volumes.

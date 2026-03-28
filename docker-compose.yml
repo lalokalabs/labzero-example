@@ -1,9 +1,9 @@
 version: '3.7'
+name: ${COMPOSE_PROJECT_NAME:-myapp}
 
 services:
   db:
     image: postgres:15-alpine
-    container_name: myapp_db
     command: >
       postgres
       -c log_statement=all
@@ -25,13 +25,11 @@ services:
 
   redis:
     image: redis:5.0.5
-    container_name: myapp_redis
     ports:
       - "6379:6379"
 
   adminer:
     image: adminer
-    container_name: myapp_adminer
     command: ["php", "-S", "0.0.0.0:8081", "-t", "/var/www/html"]
     links:
       - "db:db"
