@@ -65,6 +65,6 @@ Because multiple projects can be based on the same `labzero-project` template on
 
 - All explicit `container_name:` directives have been removed from `docker-compose.yml`.
 - The Docker Compose project name is now set via `name: ${COMPOSE_PROJECT_NAME:-myapp}` in `docker-compose.yml`, falling back to `myapp` if the variable is not set.
-- `COMPOSE_PROJECT_NAME=myapp` is added to `.env.example`. Docker Compose reads this variable automatically from `.env`. When a user runs `rename.sh myapp <newname>`, this value is updated in `.env` along with everything else, giving each project a unique container namespace (e.g., `shopify-db-1`, `shopify-redis-1`).
+- `COMPOSE_PROJECT_NAME=myapp` is added to `.env.example`. Docker Compose reads this variable automatically from `.env`. After copying `.env.example` to `.env`, users set this to a name unique to their project (e.g., `COMPOSE_PROJECT_NAME=shopify`), giving each project its own container namespace (e.g., `shopify-db-1`, `shopify-redis-1`).
 
 This ensures that each project on the same machine gets its own isolated set of Docker containers and data volumes.
